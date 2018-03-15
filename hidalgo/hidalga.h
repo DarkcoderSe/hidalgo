@@ -6,4 +6,7 @@
 #include<sys/types.h>    
 #include<unistd.h>    
 #include<string.h>
+#include<stdbool.h>
 
+#define Hid_Port 'P'
+#define Hid_IP 'I'

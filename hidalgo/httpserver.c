@@ -1,11 +1,12 @@
 #include "hidalga.h"
 #include "config.c"
-//Hidalga Server Socket MainStream
+#include "log_generator.c"
+//Hidalgo Server Socket MainStream
 //(c) - 2018 | ALL RIGHT RESERVED
 
 int main() {
-   	int port = get_http_('P');
-	int ip = get_http_('I');
+   	int port = get_http_(Hid_Port);
+	int ip = get_http_(Hid_IP);
    	int create_socket, new_socket;    
    	socklen_t addrlen;    
    	int bufsize = 1024;    
@@ -51,7 +52,9 @@ int main() {
       }
         
       recv(new_socket, buffer, bufsize, 0);    
-      printf("%s\n", buffer); 
+      //printf("%s\n", buffer);
+	if(guest_logs(buffer)) printf("\nLogs Saved\n");
+	else printf("\nLog Writing Err :: log_generator.c\n");
       write(new_socket, page, strlen(page));    
       close(new_socket);    
    }    
