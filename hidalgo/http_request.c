@@ -7,8 +7,9 @@ bool ls_htdocs(char *file){
 	htdocs = fopen("htdocs/htdocs.log", "r");
 	if(htdocs){
 		while ((getline(&line, &len, htdocs)) != -1){
+			printf("|line::%s|Argu::%s|", line, file);
 			if(strcmp(line, file)==0){
-				return (ans=true);			
+				return (ans=true);	
 			}else{
 				return ans;		
 			}
@@ -16,13 +17,7 @@ bool ls_htdocs(char *file){
 	}
 }
 char* request_handler(bool req){
-	char index[1024] = {0};
-	FILE *htdocs;
-	htdocs = fopen("htdocs/index.html", "rb");
-	fclose(htdocs);
-//<<------------------------------ Not reading index.html properly Linux core(dumb) error
-		puts(string);
-		fclose(htdocs);
+	
 	static char* OK = 
       "HTTP/1.1 200 OK\n"
       "Content-type: text/html\n\n";

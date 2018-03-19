@@ -11,6 +11,7 @@ int main() {
 	int ip = get_http_(Hid_IP);
    	int create_socket, new_socket;    
    	socklen_t addrlen;
+	char find[50] = {0};
 
    	int bufsize = 1024;    
    	char *buffer = malloc(bufsize);    
@@ -44,15 +45,34 @@ int main() {
   	   if (new_socket > 0){    
        	  printf("The Client is connected...\n");
        }
-        
+        int j=0, k=0;
        recv(new_socket, buffer, bufsize, 0);
+	
+		for(int i=0; i<50; i++){
+			if(buffer[i]=='/'){
+				j = 1;
+			}
+			else if(j==1){
+				if(buffer[i]==' ') break;
+				else{
+					find[k] = buffer[i];
+					k++;
+				}
+			}
+		}
+		find[k] = '\n';
+		char *var;
+		bool x = ls_htdocs(find);
+			var = request_handler(x);
+			puts(find);
+		
        //printf("%s\n", buffer);
 	   if(guest_logs(buffer) == true) printf("\nLogs Saved\n");
 	   else printf("\nLog Writing Err :: log_generator.c\n");
 		
-	   printf("\n---->\n");
-		char *page = request_handler(true);
-       write(new_socket, page, strlen(page));    
+	 //  printf("\n---->\n");
+	///	char *page = request_handler(true);
+       write(new_socket, var, strlen(var));    
        close(new_socket);
    }
     

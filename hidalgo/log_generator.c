@@ -4,7 +4,7 @@ bool guest_logs(char *data){
 	guest_log = fopen("visitors.log", "a");
 
 	if(guest_log){
-		puts(data);
+		//puts(data);
 		fputs(data, guest_log);
 		//fwrite(data, sizeof(char), sizeof(data), guest_log);
 		return (val=true);
